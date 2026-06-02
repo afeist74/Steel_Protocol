@@ -1,0 +1,529 @@
+/* ==========================================================================
+   1. VARIABLES & ROOT SETUP
+   ========================================================================== */
+:root {
+    --primary: #00f2ff;       /* Pure Plasma Cyan */
+    --primary-glow: rgba(0, 242, 255, 0.4);
+    --accent: #ff0055;        /* Rogue Red Accent */
+    --bg-deep: #060608;       /* Darkest background */
+    --bg-surface: #0f1015;    /* Section backgrounds */
+    --bg-card: #161822;       /* Card elements */
+    --text-main: #f0f2f5;     /* High contrast text */
+    --text-muted: #8a90a0;    /* Secondary/Description text */
+    --max-width: 1200px;
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================================================================
+   2. GLOBAL RESET & BASE STYLES
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-deep);
+    color: var(--text-main);
+}
+
+body {
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+.container {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.section-padding {
+    padding: 100px 0;
+}
+
+.bg-alt {
+    background-color: var(--bg-surface);
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* ==========================================================================
+   3. TYPOGRAPHY & BUTTONS
+   ========================================================================== */
+h1, h2, h3, h4 {
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.tagline {
+    color: var(--accent);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.9rem;
+    display: inline-block;
+    margin-bottom: 16px;
+}
+
+.glitch {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--primary);
+    filter: drop-shadow(0 0 8px var(--primary-glow));
+}
+
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+    position: relative;
+}
+
+.section-subtitle {
+    color: var(--text-muted);
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+}
+
+/* Button Component Base */
+.btn-primary, .btn-outline, .btn-download {
+    display: inline-block;
+    padding: 14px 28px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    transition: var(--transition-smooth);
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: var(--bg-deep);
+    box-shadow: 0 4px 20px var(--primary-glow);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px var(--primary);
+}
+
+.btn-outline {
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-main);
+}
+
+.btn-outline:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: rgba(0, 242, 255, 0.05);
+}
+
+.btn-download {
+    background-color: var(--accent);
+    color: white;
+    padding: 10px 20px;
+}
+
+.btn-download:hover {
+    opacity: 0.9;
+    box-shadow: 0 0 15px rgba(255, 0, 85, 0.4);
+}
+
+.btn-lg {
+    padding: 16px 36px;
+    font-size: 1rem;
+}
+
+/* ==========================================================================
+   4. NAVIGATION
+   ========================================================================== */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 24px 0;
+    transition: var(--transition-smooth);
+}
+
+.navbar.scrolled {
+    background-color: rgba(6, 6, 8, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 900;
+    text-decoration: none;
+    color: var(--text-main);
+    letter-spacing: 2px;
+}
+
+.logo span {
+    color: var(--primary);
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    gap: 32px;
+}
+
+.nav-links a:not(.btn-download) {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    transition: var(--transition-smooth);
+}
+
+.nav-links a:not(.btn-download):hover {
+    color: var(--primary);
+}
+
+/* Hamburger Menu Icon */
+.mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.mobile-toggle .bar {
+    width: 24px;
+    height: 2px;
+    background-color: var(--text-main);
+    transition: var(--transition-smooth);
+}
+
+/* ==========================================================================
+   5. HERO SECTION
+   ========================================================================== */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 100px;
+    background: radial-gradient(circle at 80% 20%, rgba(0, 242, 255, 0.05) 0%, transparent 50%);
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+}
+
+.hero-text h1 {
+    font-size: 4rem;
+    line-height: 1.1;
+    margin-bottom: 24px;
+}
+
+.hero-text p {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+    max-width: 520px;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 16px;
+}
+
+.hero-visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-character-img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    z-index: 2;
+    animation: floating 6s ease-in-out infinite;
+}
+
+/* Fallback placeholder handling when asset isn't dropped in yet */
+.hero-visual.placeholder::before {
+    content: "Insert Character Key-Art (PNG)";
+    width: 320px;
+    height: 450px;
+    border: 2px dashed rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.glow-effect {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: var(--primary-glow);
+    filter: blur(120px);
+    z-index: 1;
+    pointer-events: none;
+}
+
+@keyframes floating {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* ==========================================================================
+   6. WORLDS SECTION (SECTORS)
+   ========================================================================== */
+.world-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    margin-top: 60px;
+}
+
+.world-card {
+    background-color: var(--bg-card);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    transition: var(--transition-smooth);
+}
+
+.world-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(0, 242, 255, 0.3);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+}
+
+.world-thumb {
+    height: 180px;
+    background-size: cover;
+    background-position: center;
+    background-color: #222; /* Basic visual fallback */
+    position: relative;
+    padding: 16px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.world-label {
+    background: rgba(6, 6, 8, 0.85);
+    padding: 4px 10px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.world-card h3 {
+    font-size: 1.2rem;
+    padding: 20px 20px 8px 20px;
+}
+
+.world-card p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    padding: 0 20px 24px 20px;
+}
+
+/* ==========================================================================
+   7. GAMEPLAY FEATURES
+   ========================================================================== */
+.feature-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+}
+
+.feature-box {
+    background: linear-gradient(145deg, var(--bg-surface), var(--bg-deep));
+    padding: 40px;
+    border-radius: 8px;
+    border-left: 3px solid var(--primary);
+}
+
+.feature-box .icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 16px;
+}
+
+.feature-box h3 {
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+}
+
+.feature-box p {
+    color: var(--text-muted);
+}
+
+/* ==========================================================================
+   8. MEDIA GALLERY
+   ========================================================================== */
+.media-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    margin-top: 48px;
+}
+
+.screenshot {
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.screenshot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition-smooth);
+}
+
+.screenshot:hover img {
+    transform: scale(1.04);
+}
+
+/* ==========================================================================
+   9. CALL TO ACTION & FOOTER
+   ========================================================================== */
+.cta-banner {
+    padding: 120px 0;
+    background: linear-gradient(rgba(6,6,8,0.85), rgba(6,6,8,0.9)), radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cta-banner h2 {
+    font-size: 3rem;
+    margin-bottom: 12px;
+}
+
+.cta-banner p {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    margin-bottom: 32px;
+}
+
+.cta-group {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.footer {
+    background-color: #030304;
+    padding: 60px 0 30px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.footer-info .logo {
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+.footer-info p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.footer-socials a {
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-left: 24px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: var(--transition-smooth);
+}
+
+.footer-socials a:hover {
+    color: var(--accent);
+}
+
+.copyright {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #4a5060;
+    border-top: 1px solid rgba(255, 255, 255, 0.02);
+    padding-top: 30px;
+}
+
+/* ==========================================================================
+   10. MOBILE RESPONSIVENESS
+   ========================================================================== */
+@media (max-width: 992px) {
+    .hero-text h1 { font-size: 3rem; }
+    .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 60px; }
+    .hero-text p { margin: 0 auto 40px auto; }
+    .hero-actions { justify-content: center; }
+}
+
+@media (max-width: 768px) {
+    .section-padding { padding: 70px 0; }
+    .mobile-toggle { display: flex; }
+    
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 75%;
+        height: 100vh;
+        background-color: var(--bg-surface);
+        flex-direction: column;
+        justify-content: center;
+        gap: 40px;
+        transition: var(--transition-smooth);
+        box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+    }
+    
+    .nav-links.active {
+        right: 0;
+    }
+    
+    /* Hamburger to X Transform cross animation */
+    .mobile-toggle.open .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .mobile-toggle.open .bar:nth-child(2) { opacity: 0; }
+    .mobile-toggle.open .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+    
+    .footer-content { flex-direction: column; text-align: center; gap: 30px; }
+    .footer-socials a { margin: 0 12px; }
+    .cta-group { flex-direction: column; width: 100%; max-width: 300px; margin: 0 auto; }
+}
