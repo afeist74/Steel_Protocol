@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Steel Procotol - An atmospheric 2D action platformer following a hooded robot's journey across an enigmatic mechanical empire.">
+    <title>Steel Protocol | The Ancient Blade</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- STYLING FOR THE LIGHTBOX / MODAL PREVIEW -->
+    <style>
+        /* Make meme cards feel interactable */
+        .meme-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .meme-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 20px rgba(0, 210, 255, 0.2);
+        }
+
+        /* The Lightbox Overlay background */
+        .meme-modal {
+            display: none; 
+            position: fixed;
+            z-index: 9999; /* Sit on top of everything, including navbar */
+            padding-top: 60px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(10, 11, 16, 0.92); /* Dark overlay matching theme */
+            backdrop-filter: blur(8px);
+        }
+
+        /* Image styling inside the pop-up */
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 85%;
+            max-height: 75vh;
+            border: 2px solid #00d2ff; /* Cyberpunk glow frame */
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.4);
+            border-radius: 4px;
+        }
+
+        /* Optional Caption styling underneath */
+        #modal-caption {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
+            color: #fff;
+            padding: 15px 0;
+            font-family: sans-serif;
+            letter-spacing: 1px;
+        }
+
+        /* Animation when opening */
+        .modal-content, #modal-caption {
+            animation-name: zoom;
+            animation-duration: 0.25s;
+        }
+
+        @keyframes zoom {
+            from {transform:scale(0.85); opacity: 0;}
+            to {transform:scale(1); opacity: 1;}
+        }
+
+        /* The Close Button */
+        .modal-close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: #00d2ff;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .modal-close:hover,
+        .modal-close:focus {
+            color: #fff;
+            text-shadow: 0 0 10px #00d2ff;
+            text-decoration: none;
+        }
+
+        /* Mobile adjustments */
+        @media only screen and (max-width: 700px){
+            .modal-content {
+                width: 95%;
+            }
+            .modal-close {
+                top: 15px;
+                right: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">STEEL<span>PROTOCOL</span></a>
+            
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#story">The Journey</a></li>
+                <li><a href="#worlds">Sectors</a></li>
+                <li><a href="#gameplay">Features</a></li>
+                <li><a href="#media">Media</a></li>
+                <!-- New Navigation Link -->
+                <li><a href="#memes">Memes</a></li>
+                <li><a href="javascript:void(0)" class="btn-download">Download</a></li>
+            </ul>
+
+            <button class="mobile-toggle" aria-label="Toggle Menu" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="container hero-grid">
+                <div class="hero-text">
+                    <span class="tagline">An Ancient Weapon. A Broken World.</span>
+                    <h1>BECOME THE <span class="glitch">ROGUE</span></h1>
+                    <p>Master the gift of an ancient guardian. Carve your way through a vast, interconnected mechanical empire in this high-octane 2D action platformer.</p>
+                    
+                    <div class="hero-actions">
+                        <a href="#media" class="btn-primary">Watch Trailer</a>
+                        <a href="#story" class="btn-outline">Learn More</a>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <img src="https://i.postimg.cc/TY6STxCG/Gemini-Generated-Image-p36auqp36auqp36a-removebg-preview.png" alt="The Hooded Rogue" class="hero-character-img" onerror="this.parentElement.classList.add('placeholder')">
+                    <div class="glow-effect"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding" id="story">
+            <div class="container text-center">
+                <h2 class="section-title">The Relic of Silicon</h2>
+                <p class="section-subtitle">Awoken in exile, a lone rogue robot is chosen by a relic of the old world. Your Plasma Sword isn't just a tool for survival—it's an ancient mystery waiting to be unraveled as you push deep into hostile territory.</p>
+            </div>
+        </section>
+
+        <section class="section-padding bg-alt" id="worlds">
+            <div class="container">
+                <h2 class="section-title">Explore the Sectors</h2>
+                <div class="world-grid">
+                    <div class="world-card">
+                        <div class="world-thumb" style="background-image: url('https://i.postimg.cc/sDJVrwPP/Gemini-Generated-Image-h6l4r6h6l4r6h6l4.png');">
+                            <span class="world-label">Sector 01</span>
+                        </div>
+                        <h3>Neon Wastes</h3>
+                        <p>A graveyard of forgotten technology glowing with terminal blue light.</p>
+                    </div>
+                    <div class="world-card">
+                        <div class="world-thumb" style="background-image: url('https://i.postimg.cc/BQSrxsDh/Gemini-Generated-Image-mmn3bfmmn3bfmmn3.png');">
+                            <span class="world-label">Sector 02</span>
+                        </div>
+                        <h3>Silicon Jungle</h3>
+                        <p>Where rogue algorithms and aggressive mechanical flora have completely taken over.</p>
+                    </div>
+                    <div class="world-card">
+                        <div class="world-thumb" style="background-image: url('https://i.postimg.cc/fytHMwry/Gemini-Generated-Image-uof2u6uof2u6uof2.png');">
+                            <span class="world-label">Sector 03</span>
+                        </div>
+                        <h3>The Core Forge</h3>
+                        <p>A roaring industrial sector churning out endless waves of defensive units.</p>
+                    </div>
+                    <div class="world-card">
+                        <div class="world-thumb" style="background-image: url('https://i.postimg.cc/sDPY7Q7X/Gemini-Generated-Image-2k6btn2k6btn2k6b.png');">
+                            <span class="world-label">Sector 04</span>
+                        </div>
+                        <h3>The Citadel</h3>
+                        <p>A striking, quiet fortress sitting above the clouds. Where all truths lie hidden.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding" id="gameplay">
+            <div class="container">
+                <div class="feature-row">
+                    <div class="feature-box">
+                        <span class="icon">⚔️</span>
+                        <h3>Plasma Combat</h3>
+                        <p>Engage in fluid, directional slicing mechanics combined with a precise parry-and-counter system.</p>
+                    </div>
+                    <div class="feature-box">
+                        <span class="icon">💎</span>
+                        <h3>Artifact Tuning</h3>
+                        <p>Discover rare power sources hidden throughout the sectors to modify your movement and combat styles.</p>
+                    </div>
+                    <div class="feature-box">
+                        <span class="icon">🤖</span>
+                        <h3>Adaptive Sentinels</h3>
+                        <p>Test your reflexes against massive, complex mechanical threats guarding the depths of each zone.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding bg-alt" id="media">
+            <div class="container">
+                <h2 class="section-title">Field Logs</h2>
+                <div class="media-gallery">
+                    <div class="screenshot"><img src="https://i.postimg.cc/9XwcM1Rj/Gemini-Generated-Image-v8flsxv8flsxv8fl.png" alt="Gameplay Action 1"></div>
+                    <div class="screenshot"><img src="https://i.postimg.cc/C1f9FPvW/Gemini-Generated-Image-i4a279i4a279i4a2.png" alt="Gameplay Action 2"></div>
+                    <div class="screenshot"><img src="https://i.postimg.cc/6qXbB94X/Gemini-Generated-Image-fky9xhfky9xhfky9.png" alt="Gameplay Action 3"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- COMMUNITY MEMES SECTION -->
+        <section class="section-padding" id="memes">
+            <div class="container">
+                <h2 class="section-title">Protocol: <span class="glitch">MEMES</span></h2>
+                <p class="section-subtitle text-center">Even ancient robots need a laugh. Uploaded by the survivors of the wastes.</p>
+                
+                <div class="media-gallery">
+                    <div class="screenshot meme-card">
+                        <img src="https://i.postimg.cc/XJ5gzTJD/supermeme-15h16-53.png" alt="Meme 1">
+                    </div>
+                    <div class="screenshot meme-card">
+                        <img src="https://i.postimg.cc/1zkGwJH0/supermeme-15h16-56.png" alt="Meme 2">
+                    </div>
+                    <div class="screenshot meme-card">
+                        <img src="https://i.postimg.cc/bYBzTWnm/supermeme-15h26-53.png" alt="Meme 3">
+                        <p class="meme-caption">Vagrant when he sees a battery</p>
+                    </div>
+                </div>
+                
+                <div class="text-center" style="margin-top: 2rem;">
+                    <a href="#" class="btn-outline">Submit Your Meme</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-banner">
+            <div class="container text-center">
+                <h2>Uncover the Grid.</h2>
+                <p>Available Winter 2026 for PC and Console.</p>
+                <div class="cta-group">
+                    <a href="#" class="btn-primary btn-lg">Wishlist on Steam</a>
+                    <a href="#" class="btn-outline btn-lg">Join Discord</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-info">
+                <p class="logo">STEEL<span>PROTOCOL</span></p>
+                <p>Built by [Your Studio Name]</p>
+            </div>
+            <div class="footer-socials">
+                <a href="#">Twitter</a>
+                <a href="#">YouTube</a>
+                <a href="#">Press Kit</a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2026 Steel Protocol. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- POPUP MODAL LIGHTBOX FOR DISPLAYING INTERACTED MEMES -->
+    <div id="memeLightbox" class="meme-modal">
+        <span class="modal-close">&times;</span>
+        <img class="modal-content" id="modalTargetImg" alt="Expanded view">
+        <div id="modal-caption"></div>
+    </div>
+
+    <script src="script.js"></script>
+
+    <!-- LIGHTBOX JAVASCRIPT SYSTEM -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const modal = document.getElementById('memeLightbox');
+            const modalImg = document.getElementById('modalTargetImg');
+            const captionText = document.getElementById('modal-caption');
+            const closeBtn = document.getElementsByClassName('modal-close')[0];
+            const memeCards = document.querySelectorAll('.meme-card');
+
+            // Set up clicks on all boxes inside the meme grid
+            memeCards.forEach(card => {
+                card.addEventListener('click', function () {
+                    const img = this.querySelector('img');
+                    const caption = this.querySelector('.meme-caption');
+                    
+                    modal.style.display = "block";
+                    modalImg.src = img.src;
+                    
+                    // Pull caption if it exists, otherwise use alt text or leave empty
+                    if (caption) {
+                        captionText.innerHTML = caption.innerHTML;
+                    } else {
+                        captionText.innerHTML = img.alt || "";
+                    }
+                });
+            });
+
+            // Close when pressing the 'X' icon
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = "none";
+            });
+
+            // Close gracefully if user clicks anywhere outside the center photo box
+            modal.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            });
+
+            // Optional: Escape key bind to close view quickly
+            document.addEventListener('keydown', function(event) {
+                if (event.key === "Escape" && modal.style.display === "block") {
+                    modal.style.display = "none";
+                }
+            });
+        });
+    </script>
+</body>
+</html>
